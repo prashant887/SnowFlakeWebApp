@@ -4,9 +4,11 @@ kind: Ingress
 metadata:
   name: sf-app-ingress
   namespace: demo-namespace
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: kubernetes.docker.internal
+  - host: myapp
     http:
       paths:
       - pathType: Prefix
@@ -15,4 +17,4 @@ spec:
           service:
             name: snowflake-web-app-service
             port:
-              number: 80
+              number: 8085
