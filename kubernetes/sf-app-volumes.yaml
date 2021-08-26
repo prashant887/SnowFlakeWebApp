@@ -1,0 +1,62 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sf-log-vol
+  namespace: demo-namespace
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath #manual
+  capacity:
+    storage: 10Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/pl465j/projects/SnowFlakeWebApp/kubernetes/log"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sf-log-claim
+  namespace: demo-namespace
+spec:
+  storageClassName: hostpath #manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+  volumeName: sf-log-vol
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sf-dat-vol
+  namespace: demo-namespace
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath #manual
+  capacity:
+    storage: 10Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/pl465j/projects/SnowFlakeWebApp/kubernetes/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sf-data-claim
+  namespace: demo-namespace
+spec:
+  storageClassName: hostpath #manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+  volumeName: sf-dat-vol
+
